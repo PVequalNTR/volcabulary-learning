@@ -18,7 +18,8 @@ In the Command Prompt:
 
 Run Project:
 Vue: 
-`cd vol-vue`
+`cd frontend-vue`
+`npm install axios`
 `npm run serve`
 Django: 
 `cd volproject`

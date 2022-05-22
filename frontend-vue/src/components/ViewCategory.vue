@@ -1,5 +1,4 @@
 <template>
-{{ description }}
 <div class="modal">
   <div class="rounded-lg w-1/2 h-2/3 px-16 py-8">
     <div class="h-10">
@@ -11,7 +10,7 @@
     <p class="my-4 text-lg font-semibold">{{ description }}</p>
     <div class="flex flex-row">
       <button @click="viewlist = !viewlist" class="text-lg my-4 p-4 rounded shadow-lg bg-amber-400 text-white text-center font-semibold mr-2">單字列表</button>
-      <router-link to="solve" class="text-lg my-4 p-4 rounded shadow-lg bg-green-400 text-white text-center font-semibold ml-2">開始測驗</router-link>
+      <router-link :to="{ path:'/solve', query:{name: name}}" class="text-lg my-4 p-4 rounded shadow-lg bg-green-400 text-white text-center font-semibold ml-2">開始測驗</router-link>
     </div>
     <div v-if="viewlist === true" class="my-4 rounded-lg shadow-lg p-4 border-blue-200 border-2 overflow-scroll">
       <p v-for="word of words">{{ word }}</p>
@@ -42,6 +41,7 @@ export default {
             this.name = response.data.name
             this.words = response.data.vol_list
             this.description = response.data.description
+            this.id = response.data.id
           })
           .catch(err => {
             console.log(err)

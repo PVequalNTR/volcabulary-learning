@@ -21,7 +21,9 @@ class get_categorySerializer(serializers.ModelSerializer):
     class Meta:
         model = categories
         fields = (
+            'id',
             'name',
             'description',
             'vol_list',
         )
+

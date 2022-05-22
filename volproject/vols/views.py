@@ -1,12 +1,15 @@
+from urllib import request
 from django.http import Http404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 from .models import categories, Sentence
 from .serializers import latest_categoriesSerializer, SentenceSerializer, get_categorySerializer
 
 import random
+import json
 
 class latest_categories(APIView):
     def get(self, request, pk, format=None):
@@ -26,8 +29,8 @@ class get_category(APIView):
         serializer = get_categorySerializer(category)
         return Response(serializer.data)
 
-def get_by_id(id):
-    Category = categories.objects.filter(id = id)[0]
+def get_by_string(string):
+    Category = categories.objects.filter(name = string)[0]
     words = Category.vol_list
     ret = []
     for word in words:
@@ -35,10 +38,21 @@ def get_by_id(id):
         sentence = random.choice(sentences)
         sentence.name = sentence.name.replace(word, f'{word[0]}___{word[(len(word) - 2):]}')
         ret.append(sentence)
+    random.shuffle(ret)
     return ret
-            
+ 
 class get_sentences(APIView):
-    def get(self, request, id, format=None):
-        sentences = get_by_id(id)
+    def get(self, request, string, format=None):
+        sentences = get_by_string(string)
         serializer = SentenceSerializer(sentences, many=True)
         return Response(serializer.data)
+
+class check(APIView):
+    def post(self, request, name, format=None):
+        data = request.data
+        count = 0
+        for item in data:
+            word = Sentence.objects.filter(id = item['id'])[0].word
+            if word == item['word']:
+                count += 1
+        return Response(json.dumps({"score": count}))
