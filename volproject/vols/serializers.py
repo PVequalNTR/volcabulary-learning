@@ -1,22 +1,27 @@
 from rest_framework import serializers
-from .models import Latest_categories, Sentence
+from .models import categories, Sentence
 
 class latest_categoriesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Latest_categories
+        model = categories
         fields = (
+            'id',
             'name',
-            'slug',
-            'vol_list',
-            'date_added',
-            'get_absolute_url',
         )
 
 class SentenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sentence
         fields = (
+            'id',
             'name',
-            'word',
-            'source',
+        )
+
+class get_categorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = categories
+        fields = (
+            'name',
+            'description',
+            'vol_list',
         )

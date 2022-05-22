@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    {{ sentences }}
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
@@ -12,9 +10,8 @@ import axios from 'axios'
 import { onMounted } from 'vue'
 
 export default {
-  name: 'HomeView',
+  name: '',
   components: {
-    HelloWorld
   },
   data() {
     return {

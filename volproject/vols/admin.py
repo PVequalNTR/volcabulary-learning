@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Latest_categories, Sentence
+from .models import categories, Sentence
 
-admin.site.register(Latest_categories)
+admin.site.register(categories)
 admin.site.register(Sentence)
