@@ -1,14 +1,18 @@
 <template>
   <Navbar></Navbar>
+  <Folder id="folder1"></Folder>
+  <Folder id="folder2"></Folder>
   <router-view/>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue';
+import Folder from "./components/left-info/FolderPattern.vue"
 export default {
   name: 'root',
   components: {
     Navbar,
+    Folder,
   } 
 }
 </script>
