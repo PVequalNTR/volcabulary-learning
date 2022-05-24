@@ -2,6 +2,7 @@
   <Navbar></Navbar>
   <Folder id="folder1"></Folder>
   <Folder id="folder2"></Folder>
+  <Folder id="folder3"></Folder>
   <router-view/>
 </template>
 

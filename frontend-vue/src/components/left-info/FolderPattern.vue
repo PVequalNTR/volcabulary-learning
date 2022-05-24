@@ -36,7 +36,10 @@ export default {
     top: 80px; 
 }
 #folder2{
-    top:290px; /*+190*/
+    top:290px; /*+210*/
+}
+#folder3{
+    top: 500px;
 }
 
 </style>
