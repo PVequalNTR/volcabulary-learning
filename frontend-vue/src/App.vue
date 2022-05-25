@@ -8,7 +8,7 @@
 
 <script>
 import Navbar from './components/Navbar.vue';
-import Folder from "./components/left-info/FolderPattern.vue"
+import Folder from "./components/right-info/FolderPattern.vue"
 export default {
   name: 'root',
   components: {
