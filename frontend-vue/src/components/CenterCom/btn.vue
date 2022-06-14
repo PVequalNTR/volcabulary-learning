@@ -4,7 +4,7 @@
 
 
 <template>
-  <button id="btn" ref="btn" @load="into()">{{ msg }}</button>
+  <button id="btn" ref="btn" @click="into()">{{ msg }}</button>
 </template>
 
 <script>
