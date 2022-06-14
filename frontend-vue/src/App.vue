@@ -9,7 +9,7 @@
 
 <script>
 import Navbar from './components/Navbar.vue';
-import Folder from "./components/right-inf o/FolderPattern.vue"
+import Folder from "./components/right-info/FolderPattern.vue"
 import CenterCom from "./components/CenterCom/Component.vue"
 export default {
   name: 'root',
