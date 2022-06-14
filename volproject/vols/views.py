@@ -1,3 +1,4 @@
+from re import L
 from urllib import request
 from django.http import Http404
 
@@ -8,6 +9,8 @@ from rest_framework.decorators import api_view
 from .models import categories, Sentence
 from .serializers import latest_categoriesSerializer, SentenceSerializer, get_categorySerializer
 
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
 import random
 import json
 
@@ -56,3 +59,24 @@ class check(APIView):
             if word == item['word']:
                 count += 1
         return Response(json.dumps({"score": count}))
+
+class register(APIView):
+    def post(self, request, format=None):
+        data = request.data
+        username = data['username']
+        email = data['email']
+        password = data['password']
+        _password = data['password']
+        if password == _password:
+            if User.objects.filter(email=email).exists():
+                return Response(json.dumps({
+                    'info': 'Email already exists !'
+                }))
+            elif User.objects.filter(username=username).exists():
+                return Response(json.dumps({
+                    'info': 'Username already exists !'
+                }))
+            else :
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.save()
+                return 
