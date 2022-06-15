@@ -5,11 +5,11 @@ import btn from "./btn.vue"
 </script>
 
 <template>
-    <div id="box" class="absolute" @click="into()" >
-        <icon ref="imag"></icon>
+    <div id="box" class="absolute" >
+        <icon ></icon>
         <btn msg="教學" ></btn>
-        <btn ref="btn"></btn>
-        <btn></btn>
+        <btn second=0.6 ></btn>
+        <btn second=1.2 ></btn>
     </div>
 </template>
 
@@ -21,14 +21,6 @@ export default {
         btn,
     },
     methods:{
-        into(){
-            console.log(this)
-            const imag = this.$refs.imag;
-            const btn = this.$refs.btn;
-            // const timeline = gsap.timeline({defaults:{duration:1}});
-            gsap.from(imag,{duration:1,y:"-100vh",ease:"bounce"})
-            gsap.from(btn,{delay:1, duration:1, opacity:0,})
-        }
     }
 }
 </script>

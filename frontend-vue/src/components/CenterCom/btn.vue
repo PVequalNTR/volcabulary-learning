@@ -4,7 +4,7 @@
 
 
 <template>
-  <button id="btn" ref="btn" @click="into()">{{ msg }}</button>
+  <button id="btn" ref="btn" >{{ msg }}</button>
 </template>
 
 <script>
@@ -13,15 +13,24 @@ export default {
         msg:{
             type:String,
             default:"功能施工中",
+        },
+        second:{
+            type:Number,
+            default:0,
         }
+        
     },
     methods:{
-        into(){
-            console.log("!@#")
-            const btn = this.$refs.btn;
-            gsap.from(btn,{duration:1,opacity:0})
-        }
+    },
+    mounted(){
+        const btn = this.$refs.btn
+        console.log(this)
+        const sec = Number(this.$props.second)
+        console.log(sec,typeof(sec))
+        console.log("btn mounted")
+        gsap.from(btn,{delay:2+sec,duration:1,opacity:0,stagger:0.5})
     }
+    
 }
 </script>
 
