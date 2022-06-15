@@ -3,8 +3,8 @@ from django.contrib.postgres.fields import ArrayField
 
 class categories(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    vol_list = ArrayField(models.CharField(max_length=100))
+    name = models.CharField(max_length=1000)
+    vol_list = ArrayField(models.CharField(max_length=1000))
     date_added = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=1000)
     
@@ -17,9 +17,9 @@ class categories(models.Model):
 
 class Sentence(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    word = models.CharField(max_length=100)
-    source = models.CharField(max_length=100)
+    name = models.CharField(max_length=1000)
+    word = models.CharField(max_length=1000)
+    source = models.CharField(max_length=1000)
 
     class Meta:
         ordering = ('word', )

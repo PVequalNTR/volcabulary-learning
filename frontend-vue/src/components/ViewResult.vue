@@ -1,6 +1,9 @@
 <template>
 <div class="result">
   <div class="rounded-lg w-1/2 h-2/3 px-16 py-12 border-4 border-blue-500">
+      <router-link to="/Categories" class="h-5 w-5 float-right">
+          <i class="fa-solid fa-x float-right"></i>
+      </router-link>
       <p class="font-bold text-2xl">{{ name }}</p>
       <span class="font-bold text-2xl">分數：</span>
       <span class="font-bold text-2xl">{{ score }}</span>

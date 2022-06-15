@@ -1,20 +1,16 @@
-from unicodedata import category
-from urllib import request
+from xml.etree.ElementInclude import LimitedRecursiveIncludeError
 from django.http import Http404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from .models import categories
 import json
 from .models import categories, Sentence
 from .serializers import latest_categoriesSerializer, SentenceSerializer, get_categorySerializer
-
 from django.contrib.auth.models import User, auth
-from django.contrib import messages
 import random
 import json
-
+from .Crawler import Cambridge
 class latest_categories(APIView):
     def get(self, request, pk, format=None):
         number = categories.objects.all().count()
@@ -102,6 +98,19 @@ class add_category(APIView):
         else :
             new_category = categories.objects.create(name = name, description = description, vol_list = vol_list)
             new_category.save()
+            buildwords(vol_list)
             return Response({
                 'info': 'Success !'
             })
+
+def buildwords(vol_list):
+    for word in vol_list:
+        if Sentence.objects.filter(word = word).exists():
+            continue
+        else:
+            listEn, listCh = Cambridge.GetWebData(word)
+            for i in range(len(listEn)):
+                sentence = listEn[i]
+                if len(sentence) > 100:
+                    continue
+                Sentence.objects.create(name = sentence, word = word, source = 'Cambridge')
