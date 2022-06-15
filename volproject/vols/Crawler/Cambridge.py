@@ -17,10 +17,10 @@ def GetWebData(word): # 輸入單字
         return "Can't find the word"
     # 如果找不到單字，回傳"Can't find the word"
 
-    SetenceDatas = bs4_Data.find_all(name="div", class_="examp dexamp")
+    SetenceDatas = bs4_Data.find_all(name="span", class_="eg deg")
     listEn = []
     for SetenceData in SetenceDatas:
-        Setence = SetenceData.span.text
+        Setence = SetenceData.text
         # 這裡不能用.string要用.text，因為span裡面還塞了不少的<a>標籤(連結到個別單字頁面)
         # 使用remove把目標單字替換掉
         listEn.append(Setence)
