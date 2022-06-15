@@ -12,17 +12,35 @@ def GetWebData(word): # 輸入單字
     # type = str所以要解析
     bs4_Data = BeautifulSoup(Data,'html.parser')
     # BeautifulSoup解析html的str成bs4.BeautifulSoup格式，可是他很慢就是
+
+    if(bs4_Data.find(name="title").text=="劍橋詞典：英語-中文(繁體)翻譯"):
+        return "Can't find the word"
+    # 如果找不到單字，回傳"Can't find the word"
+
     SetenceDatas = bs4_Data.find_all(name="div", class_="examp dexamp")
-    list = []
+    listEn = []
     for SetenceData in SetenceDatas:
         Setence = SetenceData.span.text.replace(word,"_____")
-        list.append(Setence)
         # 這裡不能用.string要用.text，因為span裡面還塞了不少的<a>標籤(連結到個別單字頁面)
         # 使用remove把目標單字替換掉
-    return list  
-    # 回傳格式 [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ]
+        listEn.append(Setence)
+        # listEn 為英文句子
+    TransDatas = bs4_Data.find_all(name="span", class_="trans dtrans dtrans-se hdb break-cj")
+    listCh = []
+    for TransData in TransDatas:
+        Translation = TransData.text
+        listCh.append(Translation)
 
+    #for i in range(0,20):
+    #    print(listEn[i],listCh[i]) 測試用
 
+    return listEn,listCh  
+    # 回傳格式 [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ],["中文","這是中文"...]
+    # 相對的中英文有同個index
+    # 如果找不到單字，回傳"Can't find the word"
+
+word = input("輸入 ")
+print(GetWebData(word))
 
 
 
