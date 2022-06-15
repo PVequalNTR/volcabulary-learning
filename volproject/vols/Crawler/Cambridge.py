@@ -1,3 +1,4 @@
+#from readline import append_history_file
 from urllib.request import Request,urlopen
 from bs4 import *
 # Request 可以幫助發出複雜的請求(帶header)，所以不直接用urlopen
@@ -19,17 +20,27 @@ def GetWebData(word): # 輸入單字
 
     SetenceDatas = bs4_Data.find_all(name="span", class_="eg deg")
     listEn = []
+    notAppend = []
+    i=0
     for SetenceData in SetenceDatas:
         Setence = SetenceData.text
         # 這裡不能用.string要用.text，因為span裡面還塞了不少的<a>標籤(連結到個別單字頁面)
-        # 使用remove把目標單字替換掉
+        if len(Setence.split(" "))<=5 :
+            notAppend.append(i) 
+            continue
         listEn.append(Setence)
+        i = i+1
         # listEn 為英文句子
     TransDatas = bs4_Data.find_all(name="span", class_="trans dtrans dtrans-se hdb break-cj")
     listCh = []
+    i=0
     for TransData in TransDatas:
+        if len(notAppend) != 0 and notAppend[0] == i:
+            notAppend.pop(0)
+            continue
         Translation = TransData.text
         listCh.append(Translation)
+        i = i+1
 
     #for i in range(0,20):
     #    print(listEn[i],listCh[i]) 測試用
