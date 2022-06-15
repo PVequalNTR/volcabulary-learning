@@ -1,22 +1,15 @@
 <template>
   <Navbar></Navbar>
-  <CenterCom></CenterCom>
-  <Folder id="folder1"></Folder>
-  <Folder id="folder2"></Folder>
-  <Folder id="folder3"></Folder>
+  
   <router-view/>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue';
-import Folder from "./components/right-info/FolderPattern.vue"
-import CenterCom from "./components/CenterCom/Component.vue"
 export default {
   name: 'root',
   components: {
     Navbar,
-    Folder,
-    CenterCom,
   } 
 }
 </script>

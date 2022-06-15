@@ -1,11 +1,12 @@
-from re import L
+from unicodedata import category
 from urllib import request
 from django.http import Http404
-
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
+from .models import categories
+import json
 from .models import categories, Sentence
 from .serializers import latest_categoriesSerializer, SentenceSerializer, get_categorySerializer
 
@@ -28,9 +29,14 @@ class latest_categories(APIView):
 
 class get_category(APIView):
     def get(self, request, name, format=None):
-        category = categories.objects.filter(name=name)[0]
-        serializer = get_categorySerializer(category)
-        return Response(serializer.data)
+        if categories.objects.filter(name=name).exists():
+            category = categories.objects.filter(name=name)[0]
+            serializer = get_categorySerializer(category)
+            return Response(serializer.data)
+        else:
+            return Response({
+                'info': 'category does not exist !'
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 def get_by_string(string):
     Category = categories.objects.filter(name = string)[0]
@@ -69,14 +75,33 @@ class register(APIView):
         _password = data['password']
         if password == _password:
             if User.objects.filter(email=email).exists():
-                return Response(json.dumps({
+                return Response({
                     'info': 'Email already exists !'
-                }))
+                }, status=status.HTTP_400_BAD_REQUEST)
             elif User.objects.filter(username=username).exists():
-                return Response(json.dumps({
+                return Response({
                     'info': 'Username already exists !'
-                }))
+                }, status=status.HTTP_400_BAD_REQUEST)
             else :
                 user = User.objects.create_user(username=username, email=email, password=password)
                 user.save()
-                return 
+                return Response({
+                    'info': 'Success !'
+                })
+
+class add_category(APIView):
+    def post(self, request, format=None):
+        data = request.data
+        name = data['name']
+        description = data['description']
+        vol_list = dict(request.data)['vol_list']
+        if categories.objects.filter(name = name).exists():
+            return Response({
+                'info': 'Category\'s name had been used !'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        else :
+            new_category = categories.objects.create(name = name, description = description, vol_list = vol_list)
+            new_category.save()
+            return Response({
+                'info': 'Success !'
+            })

@@ -20,7 +20,7 @@ def GetWebData(word): # 輸入單字
     SetenceDatas = bs4_Data.find_all(name="div", class_="examp dexamp")
     listEn = []
     for SetenceData in SetenceDatas:
-        Setence = SetenceData.span.text.replace(word,"_____")
+        Setence = SetenceData.span.text
         # 這裡不能用.string要用.text，因為span裡面還塞了不少的<a>標籤(連結到個別單字頁面)
         # 使用remove把目標單字替換掉
         listEn.append(Setence)
@@ -38,9 +38,9 @@ def GetWebData(word): # 輸入單字
     # 回傳格式 [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ],["中文","這是中文"...]
     # 相對的中英文有同個index
     # 如果找不到單字，回傳"Can't find the word"
-
-word = input("輸入 ")
-print(GetWebData(word))
+if __name__ == '__main__':
+    word = input("輸入 ")
+    print(GetWebData(word))
 
 
 

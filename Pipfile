@@ -12,6 +12,7 @@ pillow = "*"
 stripe = "*"
 psycopg2 = "*"
 python-dotenv = "*"
+bs4 = "*"
 
 [dev-packages]
 
