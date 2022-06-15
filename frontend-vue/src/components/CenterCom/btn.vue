@@ -4,7 +4,7 @@
 
 
 <template>
-  <button id="btn" ref="btn" >{{ msg }}</button>
+  <button id="btn" ref="btn" @click="webJump()">{{ msg }}</button>
 </template>
 
 <script>
@@ -13,14 +13,24 @@ export default {
         msg:{
             type:String,
             default:"功能施工中",
-        },
+        }, 
         second:{
             type:Number,
             default:0,
-        }
+        }, // btn time delat
+        jump:{
+            type:String,
+            default:"None"
+        } // web to go
         
     },
     methods:{
+        webJump(){
+            const herf = this.$props.jump
+            if(herf != "None"){
+                window.open(herf);
+            }
+        }
     },
     mounted(){
         const btn = this.$refs.btn

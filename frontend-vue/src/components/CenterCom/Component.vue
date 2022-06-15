@@ -7,7 +7,7 @@ import btn from "./btn.vue"
 <template>
     <div id="box" class="absolute" >
         <icon ></icon>
-        <btn msg="教學" ></btn>
+        <btn msg="教學" jump="https://hackmd.io/@MingdaoCP/SJXthxDF5"></btn>
         <btn second=0.6 ></btn>
         <btn second=1.2 ></btn>
     </div>
