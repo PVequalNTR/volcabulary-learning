@@ -31,6 +31,11 @@ const router = createRouter({
       children: [
         { path: '/categories/view', name:'/categories/view', component: () => import('../components/ViewCategory.vue')}
       ]
+    },
+    {
+      path: "/build",
+      name:"build",
+      component: () => import("../views/CreateCategory.vue"),
     }
   ]
 })

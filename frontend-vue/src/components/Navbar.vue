@@ -16,7 +16,7 @@
         <router-link to="/Categories" class="hover:text-sky-700 p-2 hover:border-b-green-400 hover:border-b-2">開始</router-link>
       </li>
       <li class="basis-1/6">
-        <router-link to="" class="hover:text-sky-700 p-2 hover:border-b-green-400 hover:border-b-2">建立</router-link>
+        <router-link to="/build" class="hover:text-sky-700 p-2 hover:border-b-green-400 hover:border-b-2">建立</router-link>
       </li>
     </ul>
   </nav>
