@@ -1,9 +1,10 @@
 <template>
-
-<div id="InsertEntryBox" class="absolute ">
-  <InsertEntry msg="插入單字" ToLocation="/insertword"></InsertEntry>
-  <InsertEntry msg="新增單字庫" ToLocation="insertlib"></InsertEntry>
-</div>
+  <div id="formbox" class="absolute" >
+      <div id="BuildTitle">新增單字庫</div>
+      <InputData Msg="題庫名稱"></InputData>
+      <InputData Msg="題庫描述"></InputData>
+      <button id="BuildSendBtn">送出</button>
+  </div>
 </template>
 
 <script>
@@ -11,12 +12,14 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 import axios from 'axios'
 import { onMounted } from 'vue'
-import InsertEntry from "../components/Create/InsertEntry.vue"
+import InputData from "../components/Create/InputData.vue"
+import SelectData from "../components/Create/SelectData.vue"
 
 export default {
   name: '',
   components: {
-    InsertEntry,
+    InputData,
+    SelectData,
   },
   data() {
     return {
@@ -36,16 +39,19 @@ export default {
 }
 </script>
 <style>
-    #InsertEntryBox{
+    #formbox{
+        background-color: #94D8FF;
         left: 50%;
         transform: translateX(-50%);
         top: 20vh;
         width: 70vh;
-        height: 70vh;
+        height: 40vh;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         justify-content: space-around;
+        border-width: 2px;
+        border-color: black;
     }
     #BuildTitle{
       height: 30px;

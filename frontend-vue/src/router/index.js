@@ -36,6 +36,16 @@ const router = createRouter({
       path: "/build",
       name:"build",
       component: () => import("../views/CreateCategory.vue"),
+    },
+    {
+      path:"/insertword",
+      name:"insertword",
+      component: () => import("../views/insertword.vue")
+    },
+    {
+      path:"/insertlib",
+      name:"insertlib",
+      component: () => import("../views/insertlib.vue")
     }
   ]
 })
