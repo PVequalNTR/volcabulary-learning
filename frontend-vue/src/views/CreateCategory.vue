@@ -1,5 +1,5 @@
 <template>
-  <div id="box" class="absolute" >
+  <div id="formbox" class="absolute" >
       <div id="BuildTitle">插入單字</div>
       <SelectData Msg="選擇題庫"></SelectData>
       <InputData Msg="單字名稱"></InputData>
@@ -41,7 +41,7 @@ export default {
 }
 </script>
 <style>
-    #box{
+    #formbox{
         background-color: #94D8FF;
         left: 50%;
         transform: translateX(-50%);
