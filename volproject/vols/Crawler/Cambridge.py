@@ -15,7 +15,7 @@ def GetWebData(word): # 輸入單字
     # BeautifulSoup解析html的str成bs4.BeautifulSoup格式，可是他很慢就是
 
     if(bs4_Data.find(name="title").text=="劍橋詞典：英語-中文(繁體)翻譯"):
-        return "Can't find the word"
+        return "Can't find the word in Cambridge",0
     # 如果找不到單字，回傳"Can't find the word"
 
     SetenceDatas = bs4_Data.find_all(name="span", class_="eg deg")
@@ -45,8 +45,9 @@ def GetWebData(word): # 輸入單字
     #for i in range(0,20):
     #    print(listEn[i],listCh[i]) 測試用
 
-    return listEn#, listCh  
-    # 回傳格式 [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ],["中文","這是中文"...]
+    return listEn ,listCh  
+    # 回傳格式 [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ]
+    # ,["中文","這是中文"...]
     # 相對的中英文有同個index
     # 如果找不到單字，回傳"Can't find the word"
 if __name__ == '__main__':
