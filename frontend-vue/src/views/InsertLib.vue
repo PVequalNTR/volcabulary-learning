@@ -1,5 +1,6 @@
 <template>
   <div id="formbox" class="absolute" >
+    <form style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
       <div id="BuildTitle">新增單字庫</div>
       <div class= "input">
           <div id="InputTitle">題庫名稱</div>
@@ -9,7 +10,8 @@
           <div id="InputTitle">題庫描述</div>
           <input id="in"> 
       </div>
-      <button id="BuildSendBtn">送出</button>
+      <button type="submit" id="BuildSendBtn">送出</button>
+    </form>
   </div>
 </template>
 

@@ -1,18 +1,20 @@
 <template>
   <div id="formbox" class="absolute" >
+    <form style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
       <div id="BuildTitle">插入單字</div>
       <div class= "select">
-          <div id="SelectTitle">選擇題庫</div>
-          <select id="in">
-              <option>first_ca</option>
-              <option>second_ca</option>
-          </select> 
+        <div id="SelectTitle">選擇題庫</div>
+        <select id="in">
+            <option>first_ca</option>
+            <option>second_ca</option>
+        </select> 
       </div>
-    <div class= "input">
+      <div class= "input">
         <div id="InputTitle">輸入單字</div>
         <input id="in"> 
-    </div>
-      <button id="BuildSendBtn">送出</button>
+      </div>
+      <button type="submit" id="BuildSendBtn">送出</button>
+    </form>
   </div>
 </template>
 
