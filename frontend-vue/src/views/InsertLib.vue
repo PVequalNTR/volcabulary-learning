@@ -1,10 +1,11 @@
 <template>
   <div id="formbox" class="absolute" >
     <form style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
+      <!-- submit.prevent可以避免表單重新整理 -->
       <div id="BuildTitle">新增單字庫</div>
       <div class= "input">
-          <div id="InputTitle">題庫名稱</div>
-          <input id="in"> 
+          <div id="InputTitle" >題庫名稱</div>
+          <input id="in" > 
       </div>
       <div class= "input">
           <div id="InputTitle">題庫描述</div>
@@ -43,7 +44,10 @@ export default {
       .catch(err => {
         console.log(err)
       })*/
-  }
+  },
+  methods:{
+
+  },
 }
 </script>
 <style>

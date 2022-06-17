@@ -10,10 +10,10 @@
         </select> 
       </div>
       <div class= "input">
-        <div id="InputTitle">輸入單字</div>
-        <input id="in"> 
+        <div id="InputTitle" >輸入單字</div>
+        <input id="in" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
-      <button type="submit" id="BuildSendBtn">送出</button>
+      <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn">送出</button>
     </form>
   </div>
 </template>
@@ -35,9 +35,12 @@ export default {
   data() {
     return {
       sentences: [],
+      wordinput: "",
+      ifbtndisable: true,
     }
   },
   mounted() {
+    alert("輸入單字時，請使用小寫，有多個單字請以,隔開，否則將無法送出");
     /*axios
       .get('api/v1/sentence/worthwhile/')
       .then(res => {
@@ -46,6 +49,29 @@ export default {
       .catch(err => {
         console.log(err)
       })*/
+  },
+  methods:{
+    FormatJudge(){
+      console.log(this.wordinput);
+      return true;
+    }
+  },
+  watch:{
+    wordinput: function(){
+      var str = this.wordinput
+      console.log(str)
+      for(var i=0;i<str.length;i++ ){
+        if(str[i]==',' || (str[i].charCodeAt()>=97 && str[i].charCodeAt()<=122)){
+          console.log("able");
+          this.ifbtndisable = false;
+        }
+        else{
+          console.log("disable");
+          this.ifbtndisable = true;          
+        }
+      }
+
+    }
   }
 }
 </script>
