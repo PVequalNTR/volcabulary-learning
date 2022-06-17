@@ -3,6 +3,7 @@
 <div id="InsertEntryBox" class="absolute ">
   <InsertEntry msg="插入單字" ToLocation="/insertword"></InsertEntry>
   <InsertEntry msg="新增單字庫" ToLocation="/insertlib"></InsertEntry>
+  <InsertEntry msg="修改單字庫" ToLocation="/modifylib"></InsertEntry>
 </div>
 </template>
 
@@ -44,8 +45,9 @@ export default {
         height: 70vh;
         display: flex;
         flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
+        align-content: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
     }
     #BuildTitle{
       height: 30px;

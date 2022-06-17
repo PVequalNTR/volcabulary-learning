@@ -21,6 +21,7 @@ export default {
 
     .InsertEntryBtn{
         width: 45%;
+        margin: 2%;
         height: 25%;
         border-radius: 15px;
         background-color: #4CAF50;

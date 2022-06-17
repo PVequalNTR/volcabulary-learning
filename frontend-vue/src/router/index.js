@@ -46,6 +46,11 @@ const router = createRouter({
       path:"/insertlib",
       name:"insertlib",
       component: () => import("../views/insertlib.vue")
+    },
+    {
+      path:"/modifylib",
+      name:"modifylib",
+      component: () => import("../views/modifylib.vue")
     }
   ]
 })
