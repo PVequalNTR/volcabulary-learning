@@ -1,8 +1,17 @@
 <template>
   <div id="formbox" class="absolute" >
       <div id="BuildTitle">插入單字</div>
-      <SelectData Msg="選擇題庫"></SelectData>
-      <InputData Msg="單字名稱"></InputData>
+      <div class= "select">
+          <div id="SelectTitle">選擇題庫</div>
+          <select id="in">
+              <option>first_ca</option>
+              <option>second_ca</option>
+          </select> 
+      </div>
+    <div class= "input">
+        <div id="InputTitle">輸入單字</div>
+        <input id="in"> 
+    </div>
       <button id="BuildSendBtn">送出</button>
   </div>
 </template>
@@ -73,6 +82,54 @@ export default {
         border:3px solid;
         border-color: #4CAF50;
         background-color: white;
+    }
+    .input{
+        /* background-color: red; */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 15%;
+    }
+    #in{
+        height: 50%;
+        width: 60%;
+        border-width: 2px;
+        border-color: black;
+    }
+    #InputTitle{
+        height: 50%;
+        width: 20%;
+        background-color: #4CAF50;
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;;
+    }
+    .select{
+        /* background-color: red; */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 15%;
+    }
+    #in{
+        height: 50%;
+        width: 60%;
+    }
+    #SelectTitle{
+        height: 50%;
+        width: 20%;
+        background-color: #4CAF50;
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
     }
 
 </style>>

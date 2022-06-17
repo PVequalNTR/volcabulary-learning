@@ -1,8 +1,14 @@
 <template>
   <div id="formbox" class="absolute" >
       <div id="BuildTitle">新增單字庫</div>
-      <InputData Msg="題庫名稱"></InputData>
-      <InputData Msg="題庫描述"></InputData>
+      <div class= "input">
+          <div id="InputTitle">題庫名稱</div>
+          <input id="in"> 
+      </div>
+      <div class= "input">
+          <div id="InputTitle">題庫描述</div>
+          <input id="in"> 
+      </div>
       <button id="BuildSendBtn">送出</button>
   </div>
 </template>
@@ -73,6 +79,31 @@ export default {
         border:3px solid;
         border-color: #4CAF50;
         background-color: white;
+    }
+    .input{
+        /* background-color: red; */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 15%;
+    }
+    #in{
+        height: 50%;
+        width: 60%;
+        border-width: 2px;
+        border-color: black;
+    }
+    #InputTitle{
+        height: 50%;
+        width: 20%;
+        background-color: #4CAF50;
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;;
     }
 
 </style>>

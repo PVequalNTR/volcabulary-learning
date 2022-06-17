@@ -20,7 +20,6 @@
       </li>
     </ul>
   </nav>
-  <hr>
 </template>
 
 <script>
