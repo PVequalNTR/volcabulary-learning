@@ -40,7 +40,7 @@ export default {
   },
   mounted() {
     axios
-      .get('api/v1/get_sentences/' + this.$route.query.name)
+      .get('api/v1/get_sentences/' + this.$route.query.id)
       .then(res => {
         this.sentences = res.data
         this.max = Object.keys(res.data).length
