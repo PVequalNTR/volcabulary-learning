@@ -7,7 +7,7 @@ r = rq.post("http://127.0.0.1:8000/api/v1/add_category", data={
     'vol_list': [
         'spring',
         'sad',
-        'happy', 
+        '4545', 
     ]
 })
 print(r.text)

@@ -45,7 +45,7 @@ def GetWebData(word): # 輸入單字
     #for i in range(0,20):
     #    print(listEn[i],listCh[i]) 測試用
 
-    return listEn,listCh  
+    return listEn#, listCh  
     # 回傳格式 [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ],["中文","這是中文"...]
     # 相對的中英文有同個index
     # 如果找不到單字，回傳"Can't find the word"

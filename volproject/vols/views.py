@@ -23,18 +23,18 @@ class latest_categories(APIView):
         return Response(serializer.data)
 
 class get_category(APIView):
-    def get(self, request, name, format=None):
-        if categories.objects.filter(name=name).exists():
-            category = categories.objects.filter(name=name)[0]
+    def get(self, request, id, format=None):
+        if categories.objects.filter(id=id).exists():
+            category = categories.objects.filter(id=id)[0]
             serializer = get_categorySerializer(category)
             return Response(serializer.data)
         else:
             return Response({
-                'info': 'category does not exist !'
+                'info': 'Wrong category id !'
             }, status=status.HTTP_400_BAD_REQUEST)
 
-def get_by_string(string):
-    Category = categories.objects.filter(name = string)[0]
+def get_by_id(id):
+    Category = categories.objects.filter(id = id)[0]
     words = Category.vol_list
     ret = []
     for word in words:
@@ -46,10 +46,15 @@ def get_by_string(string):
     return ret
  
 class get_sentences(APIView):
-    def get(self, request, string, format=None):
-        sentences = get_by_string(string)
-        serializer = SentenceSerializer(sentences, many=True)
-        return Response(serializer.data)
+    def get(self, request, id, format=None):
+        sentences = get_by_id(id)
+        if len(sentences) == 0:
+            return Response({
+                'info': 'No this word'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        else :
+            serializer = SentenceSerializer(sentences, many=True)
+            return Response(serializer.data)
 
 class check(APIView):
     def post(self, request, name, format=None):
@@ -63,6 +68,7 @@ class check(APIView):
 
 class register(APIView):
     def post(self, request, format=None):
+        return
         data = request.data
         username = data['username']
         email = data['email']
@@ -90,9 +96,10 @@ class add_category(APIView):
         name = data['name']
         description = data['description']
         vol_list = dict(request.data)['vol_list']
-        if categories.objects.filter(name = name).exists():
+        ret = buildwords(vol_list)
+        if ret[0] != 'Success':
             return Response({
-                'info': 'Category\'s name had been used !'
+                'info': 'The word ' + ret[1] + ' was not found in dictionary'
             }, status=status.HTTP_400_BAD_REQUEST)
         else :
             new_category = categories.objects.create(name = name, description = description, vol_list = vol_list)
@@ -107,9 +114,33 @@ def buildwords(vol_list):
         if Sentence.objects.filter(word = word).exists():
             continue
         else:
-            listEn, listCh = Cambridge.GetWebData(word)
+            listEn = Cambridge.GetWebData(word)
+            if listEn == 'Can\'t find the word':
+                return ('Error', word)
             for i in range(len(listEn)):
                 sentence = listEn[i]
                 if len(sentence) > 100:
                     continue
                 Sentence.objects.create(name = sentence, word = word, source = 'Cambridge')
+    return ('Success')
+
+class edit_category(APIView):
+    def post(self, request, id, format=None):
+        data = request.data
+        name = data['name']
+        description = data['description']
+        vol_list = dict(request.data)['vol_list']
+        if not categories.objects.filter(id = id).exists():
+            return Response({
+                'info': 'No this category !'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        else :
+            category = categories.objects.filter(name = name)[0]
+            category['name'] = name
+            category['description'] = description
+            category['vol_list'] = vol_list
+            category.save()
+            buildwords(vol_list)
+            return Response({
+                'info': 'Success !'
+            })
