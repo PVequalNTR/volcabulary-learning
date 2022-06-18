@@ -3,16 +3,16 @@
     <form style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
       <!-- submit.prevent可以避免表單重新整理 -->
       <div id="BuildTitle">新增單字庫</div>
-      <div class= "input">
+      <div class= "input" style="height:30%">
           <div id="InputTitle" >題庫名稱</div>
           <input id="in" > 
       </div>
-      <div class= "input">
-          <div id="InputTitle">題庫描述</div>
+      <div class= "input" style="height:30%" >
+          <div id="InputTitle" >題庫描述</div>
           <input id="in"> 
       </div>
-      <div class= "input">
-        <div id="InputTitle" >輸入單字</div>
+      <div class= "input" style="height:30%">
+        <div id="InputTitle"  >輸入單字</div>
         <input id="in" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
       <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn">送出</button>
@@ -124,6 +124,7 @@ export default {
         border-color: black;
     }
     #InputTitle{
+        border-radius: 15px;
         height: 50%;
         width: 20%;
         background-color: #4CAF50;

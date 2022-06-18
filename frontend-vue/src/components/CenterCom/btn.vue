@@ -15,8 +15,8 @@ export default {
             default:"功能施工中",
         }, 
         second:{
-            type:Number,
-            default:0,
+            type:String,
+            default:"0",
         }, // btn time delat
         jump:{
             type:String,

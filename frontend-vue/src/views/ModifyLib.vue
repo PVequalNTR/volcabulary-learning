@@ -1,15 +1,15 @@
 <template>
   <div id="formbox" class="absolute" >
     <form style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
-      <div id="BuildTitle">修改單字</div>
-      <div class= "select">
-        <div id="SelectTitle">選擇題庫</div>
+      <div id="BuildTitle" >修改單字</div>
+      <div class= "select" style="height:30%">
+        <div id="SelectTitle" >選擇題庫</div>
         <select id="in">
             <option>first_ca</option>
             <option>second_ca</option>
         </select> 
       </div>
-      <div class= "input">
+      <div class= "input" style="height:30%">
         <div id="InputTitle" >修改單字</div>
         <input id="in" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
@@ -107,6 +107,7 @@ export default {
         font-weight:600;
     }
     #BuildSendBtn:hover{
+        text-align: center;
         border:3px solid;
         border-color: #4CAF50;
         background-color: white;
@@ -122,10 +123,9 @@ export default {
     #in{
         height: 50%;
         width: 60%;
-        border-width: 2px;
-        border-color: black;
     }
     #InputTitle{
+        border-radius: 15px;
         height: 50%;
         width: 20%;
         background-color: #4CAF50;
@@ -144,11 +144,8 @@ export default {
         width: 100%;
         height: 15%;
     }
-    #in{
-        height: 50%;
-        width: 60%;
-    }
     #SelectTitle{
+        border-radius: 15px;
         height: 50%;
         width: 20%;
         background-color: #4CAF50;

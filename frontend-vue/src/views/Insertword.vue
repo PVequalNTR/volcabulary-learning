@@ -2,14 +2,14 @@
   <div id="formbox" class="absolute" >
     <form style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
       <div id="BuildTitle">插入單字</div>
-      <div class= "select">
-        <div id="SelectTitle">選擇題庫</div>
+      <div class= "select" style="height:30%">
+        <div id="SelectTitle" >選擇題庫</div>
         <select id="in">
             <option>first_ca</option>
             <option>second_ca</option>
         </select> 
       </div>
-      <div class= "input">
+      <div class= "input" style="height:30%">
         <div id="InputTitle" >輸入單字</div>
         <input id="in" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
@@ -126,6 +126,7 @@ export default {
         border-color: black;
     }
     #InputTitle{
+        border-radius: 15px;
         height: 50%;
         width: 20%;
         background-color: #4CAF50;
@@ -149,6 +150,7 @@ export default {
         width: 60%;
     }
     #SelectTitle{
+        border-radius: 15px;
         height: 50%;
         width: 20%;
         background-color: #4CAF50;
