@@ -20,6 +20,7 @@ class Sentence(models.Model):
     name = models.CharField(max_length=1000)
     word = models.CharField(max_length=1000)
     source = models.CharField(max_length=1000)
+    chinese = models.CharField(max_length=1000)
 
     class Meta:
         ordering = ('word', )

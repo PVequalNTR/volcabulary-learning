@@ -57,14 +57,22 @@ class get_sentences(APIView):
             return Response(serializer.data)
 
 class check(APIView):
-    def post(self, request, name, format=None):
+    def post(self, request, format=None):
+        correct = []
+        chinese = []
         data = request.data
         count = 0
         for item in data:
             word = Sentence.objects.filter(id = item['id'])[0].word
             if word == item['word']:
                 count += 1
-        return Response(json.dumps({"score": count}))
+                correct.append(True)
+            else:
+                correct.append(False)
+            
+            chinese.append(Sentence.objects.filter(id = item['id'])[0].chinese)
+            
+        return Response({"score": count, "correct": correct, "chinese": chinese})
 
 class register(APIView):
     def post(self, request, format=None):
@@ -114,15 +122,15 @@ def buildwords(vol_list):
         if Sentence.objects.filter(word = word).exists():
             continue
         else:
-            listEn = Cambridge.GetWebData(word)
-            if listEn == 'Can\'t find the word':
+            listEn, listCh = Cambridge.GetWebData(word)
+            if listEn == 'Can\'t find the word in Cambridge':
                 return ('Error', word)
             for i in range(len(listEn)):
                 sentence = listEn[i]
                 if len(sentence) > 100:
                     continue
-                Sentence.objects.create(name = sentence, word = word, source = 'Cambridge')
-    return ('Success')
+                Sentence.objects.create(name = sentence, word = word, source = 'Cambridge', chinese = listCh[i])
+    return ('Success', 0)
 
 class edit_category(APIView):
     def post(self, request, id, format=None):

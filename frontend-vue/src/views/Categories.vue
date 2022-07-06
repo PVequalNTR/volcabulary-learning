@@ -2,8 +2,8 @@
     <div class="justify-center flex">
         <div class="w-3/5 mt-6">
             <h1 class="text-3xl font-bold text-left">題庫列表</h1>
-            <div class="grid grid-cols-6 gap-4 mt-8">
-                <router-link v-for="item of categories_list" :to="{ path:'/categories/view', query:{id:item.id}}" class="p-4 rounded-lg shadow-lg bg-indigo-400 text-white text-center" >
+            <div class="grid grid-cols-5 gap-4 mt-8">
+                <router-link v-for="item of categories_list" :to="{ path:'/categories/view', query:{id:item.id}}" class="p-4 rounded-lg shadow-lg bg-indigo-400 text-white text-center font-bold" >
                 {{ item.name }}
                 </router-link>
                 <router-view></router-view>

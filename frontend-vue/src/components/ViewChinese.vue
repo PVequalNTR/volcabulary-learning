@@ -1,28 +1,27 @@
 <template>
 <div class="result">
   <div class="rounded-lg w-1/2 h-2/3 px-16 py-12 border-4 border-blue-500">
-      <router-link to="/Categories" class="h-5 w-5 float-right">
+      <button class="h-5 w-5 float-right" @click="close()">
           <i class="fa-solid fa-x float-right"></i>
-      </router-link>
-      <p class="font-bold text-2xl">{{ name }}</p>
-      <span class="font-bold text-2xl">分數：</span>
-      <span class="font-bold text-2xl">{{ score }}</span>
+      </button>
+      <p class="font-bold text-2xl mb-10">原文 : {{ sentence }}</p>
+      <span class="font-bold text-2xl">翻譯 : {{ chinese }}</span>
   </div>
 </div>
     
 </template>
 <script>
-
 export default {
-    name: 'ViewResult',
+    name: 'ViewChinese',
     props: {
-      name: String,
-      score: Number
+      sentence: String,
+      chinese: String,
     },
-    data() {
-        return { 
-        }
-    },
+    methods: {
+      close() {
+        this.$emit('close'); 
+      }
+    }
 }
 </script>
 <style scoped>
@@ -34,7 +33,6 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
 .result div {
   background-color: white;
 }
