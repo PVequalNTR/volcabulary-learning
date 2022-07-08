@@ -13,8 +13,6 @@ from .Crawler import Cambridge
 class latest_categories(APIView):
     def get(self, request, pk, format=None):
         number = categories.objects.all().count()
-        if pk == -1:
-            category = categories.objects.all()
         if number < (pk - 1) * 10 + 1:
             raise Http404
         elif number < pk * 10:
@@ -23,7 +21,11 @@ class latest_categories(APIView):
             category = categories.objects.all()[(pk - 1) * 10 : pk * 10]
         serializer = latest_categoriesSerializer(category, many=True)
         return Response(serializer.data)
-
+class all_categories(APIView):
+    def get(self, request, format=None):
+        category = categories.objects.all()
+        serializer = latest_categoriesSerializer(category, many=True)
+        return Response(serializer.data)
 class get_category(APIView):
     def get(self, request, id, format=None):
         if categories.objects.filter(id=id).exists():

@@ -7,4 +7,5 @@ urlpatterns = [
     path('get_category/<int:id>', views.get_category.as_view()),
     path('check/', views.check.as_view()),
     path('add_category/', views.add_category.as_view()),
+    path('all_categories', views.all_categories.as_view()),
 ]
