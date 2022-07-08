@@ -125,6 +125,12 @@ export default {
         border-width: 2px;
         border-color: black;
     }
+    #ErrorIn{
+        height: 50%;
+        width: 60%;
+        border-width: 2px;
+        border-color: red;
+    }
     #InputTitle{
         border-radius: 15px;
         height: 50%;

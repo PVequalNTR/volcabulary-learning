@@ -4,16 +4,17 @@
       <div id="BuildTitle" >修改單字</div>
       <div class= "select" style="height:30%">
         <div id="SelectTitle" >選擇題庫</div>
-        <select id="in">
-            <option>first_ca</option>
-            <option>second_ca</option>
+        <select id="select">
+            <option >first_ca</option>
+            <option >second_ca</option>
         </select> 
       </div>
       <div class= "input" style="height:30%">
         <div id="InputTitle" >修改單字</div>
-        <input id="in" :value="wordinput" @input="wordinput=$event.target.value"> 
+        <input :id="wordInputId" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
-      <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn">送出</button>
+      <div v-if="notFormat" style="color:red;">輸入格式錯誤</div>
+      <button type="button" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
     </form>
   </div>
 </template>
@@ -35,12 +36,25 @@ export default {
   data() {
     return {
       sentences: [],
-      wordinput: "happy,sad", // 從後端抓單字
+      wordinput: "", // 從後端抓單字
+      descriptnput:"",
       ifbtndisable: true,
+      notFormat:false,
+      wordInputId: "in",
+      categoryList: [],
     }
   },
   mounted() {
     alert("修改單字時，請使用小寫，有多個單字請以,隔開，否則將無法送出");
+    axios.get("api/v1/all_categories/")
+    .then( (res) => {
+      console.log(res);
+      this.categoryList = res.data
+      console.log(res.data)
+      console.log(this.categoryList)
+    } )
+    .catch( (err) => { console.log(err)} )
+    console.log(this.categoryList,"Q")
     /*axios
       .get('api/v1/sentence/worthwhile/')
       .then(res => {
@@ -54,26 +68,56 @@ export default {
     FormatJudge(){
       console.log(this.wordinput);
       return true;
+    },
+    sent(){
+      var list = this.wordinput.split(",")
+      var name = document.getElementById("select").value
+      console.log(name)
+      axios.post("api/v1/edit_category/"+name,{
+          "name": name,
+          "description": this.descriptnput,
+          "vol_list": list,
+        }
+      )
+      .then((res)=>{
+        console.log(res);
+        this.libname="";
+        this.descriptnput="";
+        this.wordinput="";
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.info);
+      })
     }
   },
   watch:{
     wordinput: function(){
       var str = this.wordinput
-      console.log(str)
+      console.log("~"+str)
+      if(str==""){
+        this.notFormat=false; 
+        this.wordInputId = "in"
+        console.log("empty")         
+      }
       for(var i=0;i<str.length;i++ ){
         if(str[i]==',' || (str[i].charCodeAt()>=97 && str[i].charCodeAt()<=122)){
           console.log("able");
           this.ifbtndisable = false;
+          this.notFormat=false;
+          this.wordInputId = "in"
         }
         else{
           console.log("disable");
-          this.ifbtndisable = true;          
+          this.ifbtndisable = true; 
+          this.notFormat=true;
+          this.wordInputId = "ErrorIn"
         }
       }
-
     }
   }
 }
+
 </script>
 <style>
     #formbox{
@@ -123,6 +167,18 @@ export default {
     #in{
         height: 50%;
         width: 60%;
+        border-width: 2px;
+        border-color: black;
+    }
+    #ErrorIn{
+        height: 50%;
+        width: 60%;
+        border-width: 2px;
+        border-color: red;
+    }
+    #select{
+        height: 50%;
+        width: 60%; 
     }
     #InputTitle{
         border-radius: 15px;
