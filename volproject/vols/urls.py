@@ -14,6 +14,6 @@ urlpatterns = [
     # 新增資料庫 ( params: {name:'', description:'', vol_list:''})
     path('all_categories/', views.all_categories.as_view()),
     # 所有資料庫資訊
-    path('edit_category/', views.edit_category.as_view()),
+    path('edit_category/<int:id>', views.edit_category.as_view()),
     
 ]

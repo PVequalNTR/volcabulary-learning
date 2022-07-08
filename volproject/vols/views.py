@@ -148,9 +148,9 @@ class edit_category(APIView):
             }, status=status.HTTP_400_BAD_REQUEST)
         else :
             category = categories.objects.filter(name = name)[0]
-            category['name'] = name
-            category['description'] = description
-            category['vol_list'] = vol_list
+            category.name = name
+            category.description = description
+            category.vol_list = vol_list
             category.save()
             buildwords(vol_list)
             return Response({
