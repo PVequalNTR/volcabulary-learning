@@ -5,17 +5,17 @@
       <div id="BuildTitle">新增單字庫</div>
       <div class= "input" style="height:30%">
           <div id="InputTitle" >題庫名稱</div>
-          <input id="in" > 
+          <input id="in" :value="libname" @input="libname=$event.target.value"> 
       </div>
       <div class= "input" style="height:30%" >
           <div id="InputTitle" >題庫描述</div>
-          <input id="in"> 
+          <input id="in" :value="descriptnput" @input="descriptnput=$event.target.value"> 
       </div>
       <div class= "input" style="height:30%">
         <div id="InputTitle"  >輸入單字</div>
         <input id="in" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
-      <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn">送出</button>
+      <button type="button" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
     </form>
   </div>
 </template>
@@ -37,7 +37,9 @@ export default {
   data() {
     return {
       sentences: [],
+      libname:"",
       wordinput: "",
+      descriptnput: "",
       ifbtndisable: true,
     }
   },
@@ -53,7 +55,19 @@ export default {
       })*/
   },
   methods:{
+    sent(){
+      var list = this.wordinput.split(",")
+      axios.post("api/v1/add_category/",{
+          "name": this.libname,
+          "description": this.descriptnput,
+          "vol_list": list,
+        }
+      )
+      .then((res)=>{console.log(res)})
+      .catch((err) => {console.log(err)})
 
+      console.log("pass")
+    },
   },
   watch:{
     wordinput: function(){
