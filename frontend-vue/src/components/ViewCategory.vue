@@ -42,6 +42,7 @@ export default {
             this.words = response.data.vol_list
             this.description = response.data.description
             this.id = response.data.id
+            console.log(response)
           })
           .catch(err => {
             console.log(err)

@@ -4,8 +4,9 @@
       <div id="BuildTitle" >修改單字</div>
       <div class= "select" style="height:30%">
         <div id="SelectTitle" >選擇題庫</div>
-        <select id="select">
-            <option v-for="(item,index) in categoryList" :key="index" :value="[item.id,index]">{{ item.name }}</option>
+        <select id="select" @change="SelectCategory">
+            <option></option>
+            <option v-for="(item,index) in categoryList" :key="index" :value="item.id" >{{ item.name }}</option>
         </select> 
       </div>
       <div class= "input" style="height:30%">
@@ -13,7 +14,7 @@
         <input :id="wordInputId" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
       <div v-if="notFormat" style="color:red;">輸入格式錯誤</div>
-      <button type="button" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
+      <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
     </form>
   </div>
 </template>
@@ -47,20 +48,9 @@ export default {
     alert("修改單字時，請使用小寫，有多個單字請以,隔開，否則將無法送出");
     axios.get("api/v1/all_categories/")
     .then( (res) => {
-      console.log(res);
       this.categoryList = res.data
-      console.log(res.data)
-      console.log(this.categoryList)
     } )
     .catch( (err) => { console.log(err)} )
-    /*axios
-      .get('api/v1/sentence/worthwhile/')
-      .then(res => {
-        this.sentences = res.data
-      })
-      .catch(err => {
-        console.log(err)
-      })*/
   },
   methods:{
     FormatJudge(){
@@ -69,11 +59,13 @@ export default {
     },
     sent(){
       var list = this.wordinput.split(",")
-      var optionvalue = document.getElementById("select").value
-      console.log(optionvalue[0],optionvalue[1],typeof(optionvalue[0]),typeof(optionvalue[1]))
-      console.log(this.categoryList[optionvalue[1]].name)
-      axios.post("api/v1/edit_category/"+"2",{
-          "name": this.categoryList[optionvalue[1]].name,
+      var id = document.getElementById("select").value
+      var name=""
+      for(var i=0;i<this.categoryList.length;i++){
+        if(this.categoryList[i].id==parseInt(id)) name = this.categoryList[i].name
+      }
+      axios.post("api/v1/edit_category/"+id,{
+          "name": name,
           "description": this.descriptnput,
           "vol_list": list,
         }
@@ -88,6 +80,14 @@ export default {
         console.log(err);
         alert(err.response.data.info);
       })
+    },
+    SelectCategory(){
+      console.log("selected")
+      axios.get("api/v1/get_category/"+document.getElementById("select").value)
+      .then( (res) => {
+        this.wordinput = res.data.vol_list.join(",")
+      } )
+      .catch( (err) => console.log(err) )
     }
   },
   watch:{

@@ -16,7 +16,7 @@
         <input :id="wordInputId" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
       <div v-if="notFormat" style="color:red;">輸入格式錯誤</div>
-      <button type="button" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
+      <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
     </form>
   </div>
 </template>
