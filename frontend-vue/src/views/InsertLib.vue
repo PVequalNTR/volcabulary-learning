@@ -13,9 +13,10 @@
       </div>
       <div class= "input" style="height:30%">
         <div id="InputTitle"  >輸入單字</div>
-        <input id="in" :value="wordinput" @input="wordinput=$event.target.value"> 
+        <input :id="wordInputId" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
-      <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
+      <div v-if="notFormat" style="color:red;">輸入格式錯誤</div>
+      <button type="button" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
     </form>
   </div>
 </template>
@@ -41,6 +42,8 @@ export default {
       wordinput: "",
       descriptnput: "",
       ifbtndisable: true,
+      wordInputId: "in",
+      notFormat: false,
     }
   },
   mounted() {
@@ -63,8 +66,16 @@ export default {
           "vol_list": list,
         }
       )
-      .then((res)=>{console.log(res)})
-      .catch((err) => {console.log(err)})
+      .then((res)=>{
+        console.log(res);
+        this.libname="";
+        this.descriptnput="";
+        this.wordinput="";
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.info);
+      })
 
       console.log("pass")
     },
@@ -72,15 +83,24 @@ export default {
   watch:{
     wordinput: function(){
       var str = this.wordinput
-      console.log(str)
+      console.log("~"+str)
+      if(str==""){
+        this.notFormat=false; 
+        this.wordInputId = "in"
+        console.log("empty")         
+      }
       for(var i=0;i<str.length;i++ ){
         if(str[i]==',' || (str[i].charCodeAt()>=97 && str[i].charCodeAt()<=122)){
           console.log("able");
           this.ifbtndisable = false;
+          this.notFormat=false;
+          this.wordInputId = "in"
         }
         else{
           console.log("disable");
-          this.ifbtndisable = true;          
+          this.ifbtndisable = true; 
+          this.notFormat=true;
+          this.wordInputId = "ErrorIn"
         }
       }
     }
@@ -137,6 +157,12 @@ export default {
         border-width: 2px;
         border-color: black;
     }
+    #ErrorIn{
+        height: 50%;
+        width: 60%;
+        border-width: 2px;
+        border-color: red;
+    }
     #InputTitle{
         border-radius: 15px;
         height: 50%;
@@ -147,7 +173,8 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        color: black;;
+        color: black;
     }
+
 
 </style>>
