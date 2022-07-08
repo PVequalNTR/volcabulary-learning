@@ -13,6 +13,8 @@ from .Crawler import Cambridge
 class latest_categories(APIView):
     def get(self, request, pk, format=None):
         number = categories.objects.all().count()
+        if pk == -1:
+            category = categories.objects.all()
         if number < (pk - 1) * 10 + 1:
             raise Http404
         elif number < pk * 10:
