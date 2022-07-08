@@ -5,8 +5,7 @@
       <div class= "select" style="height:30%">
         <div id="SelectTitle" >選擇題庫</div>
         <select id="select">
-            <option >first_ca</option>
-            <option >second_ca</option>
+            <option v-for="(item,index) in categoryList" :key="index" :value="[item.id,index]">{{ item.name }}</option>
         </select> 
       </div>
       <div class= "input" style="height:30%">
@@ -54,7 +53,6 @@ export default {
       console.log(this.categoryList)
     } )
     .catch( (err) => { console.log(err)} )
-    console.log(this.categoryList,"Q")
     /*axios
       .get('api/v1/sentence/worthwhile/')
       .then(res => {
@@ -71,10 +69,11 @@ export default {
     },
     sent(){
       var list = this.wordinput.split(",")
-      var name = document.getElementById("select").value
-      console.log(name)
-      axios.post("api/v1/edit_category/"+name,{
-          "name": name,
+      var optionvalue = document.getElementById("select").value
+      console.log(optionvalue[0],optionvalue[1],typeof(optionvalue[0]),typeof(optionvalue[1]))
+      console.log(this.categoryList[optionvalue[1]].name)
+      axios.post("api/v1/edit_category/"+"2",{
+          "name": this.categoryList[optionvalue[1]].name,
           "description": this.descriptnput,
           "vol_list": list,
         }
