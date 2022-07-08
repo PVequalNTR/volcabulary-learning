@@ -11,8 +11,16 @@ urlpatterns = [
     path('check/', views.check.as_view()),
     # 提交答案 ( 先不用管他 )
     path('add_category/', views.add_category.as_view()),
+<<<<<<< HEAD
     path('all_categories/', views.all_categories.as_view()),
     # 新增資料庫 ( params: {name:'', description:'', vol_list:''})
     path('all_categories/', views.all_categories.as_view()),
     # 所有資料庫資訊
+=======
+    # 新增資料庫 ( params: {name:'', description:'', vol_list:''})
+    path('all_categories/', views.all_categories.as_view()),
+    # 所有資料庫資訊
+    path('edit_category/', views.edit_category.as_view()),
+    
+>>>>>>> 6a2dd8d260305c2bc449f7c55b30196ec5317d46
 ]
