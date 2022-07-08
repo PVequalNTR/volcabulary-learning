@@ -77,6 +77,7 @@ def GetWebData(word): # 輸入單字
 
     # 更多解釋裡塞了太多垃圾東西，我就不處理了
 
+    #print(listEn,listCh,Tense,Comparative,Plural,VerbChange,len(listEn),len(listCh) )
 
     return listEn,listCh,Tense,Comparative,Plural,VerbChange
     # 回傳格式 [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ]

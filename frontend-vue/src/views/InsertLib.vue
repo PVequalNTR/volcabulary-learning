@@ -15,7 +15,7 @@
         <div id="InputTitle"  >輸入單字</div>
         <input id="in" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
-      <button type="button" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
+      <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
     </form>
   </div>
 </template>

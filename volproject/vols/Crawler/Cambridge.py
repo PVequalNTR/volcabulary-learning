@@ -18,16 +18,19 @@ def GetWebData(word): # 輸入單字
         return "Can't find the word in Cambridge",0
     # 如果找不到單字，回傳"Can't find the word"
 
-    SetenceDatas = bs4_Data.find_all(name="span", class_="eg deg")
+    SetenceDatas = bs4_Data.find_all(name="div", class_="examp dexamp")
     listEn = []
     notAppend = []
     i=0
     for SetenceData in SetenceDatas:
-        Setence = SetenceData.text
-        # 這裡不能用.string要用.text，因為span裡面還塞了不少的<a>標籤(連結到個別單字頁面)
-        if len(Setence.split(" "))<=5 :
-            notAppend.append(i) 
+        if(SetenceData.find(name="span",class_="trans dtrans dtrans-se hdb break-cj")==None):
             continue
+        Setence = SetenceData.find(name="span",class_="eg deg").text
+        # 這裡不能用.string要用.text，因為span裡面還塞了不少的<a>標籤(連結到個別單字頁面)
+        # if len(Setence.split(" "))<=5 :
+        #     notAppend.append(i)
+        #     i = i+1 
+        #     continue
         listEn.append(Setence)
         i = i+1
         # listEn 為英文句子
@@ -35,16 +38,16 @@ def GetWebData(word): # 輸入單字
     listCh = []
     i=0
     for TransData in TransDatas:
-        if len(notAppend) != 0 and notAppend[0] == i:
-            notAppend.pop(0)
-            continue
+        # if len(notAppend) != 0 and notAppend[0] == i:
+        #     notAppend.pop(0)
+        #     i = i+1
+        #     continue
         Translation = TransData.text
         listCh.append(Translation)
         i = i+1
 
     #for i in range(0,20):
     #    print(listEn[i],listCh[i]) 測試用
-
     return listEn ,listCh  
     # 回傳格式 [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ]
     # ,["中文","這是中文"...]
