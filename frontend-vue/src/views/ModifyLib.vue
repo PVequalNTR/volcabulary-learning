@@ -47,14 +47,13 @@ export default {
   mounted() {
     alert("修改單字時，請使用小寫，有多個單字請以,隔開，否則將無法送出");
     axios.get("api/v1/all_categories/")
-    .then( (res) => {
-      console.log(res);
+    .then( res => {
+      //console.log(res);
       this.categoryList = res.data
-      console.log(res.data)
       console.log(this.categoryList)
     } )
     .catch( (err) => { console.log(err)} )
-    console.log(this.categoryList,"Q")
+    //console.log(this.categoryList,"Q")
     /*axios
       .get('api/v1/sentence/worthwhile/')
       .then(res => {
@@ -66,7 +65,7 @@ export default {
   },
   methods:{
     FormatJudge(){
-      console.log(this.wordinput);
+      //console.log(this.wordinput);
       return true;
     },
     sent(){
@@ -80,7 +79,7 @@ export default {
         }
       )
       .then((res)=>{
-        console.log(res);
+        //console.log(res);
         this.libname="";
         this.descriptnput="";
         this.wordinput="";
@@ -98,7 +97,7 @@ export default {
       if(str==""){
         this.notFormat=false; 
         this.wordInputId = "in"
-        console.log("empty")         
+        //console.log("empty")         
       }
       for(var i=0;i<str.length;i++ ){
         if(str[i]==',' || (str[i].charCodeAt()>=97 && str[i].charCodeAt()<=122)){
@@ -108,7 +107,7 @@ export default {
           this.wordInputId = "in"
         }
         else{
-          console.log("disable");
+          //console.log("disable");
           this.ifbtndisable = true; 
           this.notFormat=true;
           this.wordInputId = "ErrorIn"
