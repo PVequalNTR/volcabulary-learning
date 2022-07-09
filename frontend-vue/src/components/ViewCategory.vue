@@ -15,6 +15,7 @@
     <div v-if="viewlist === true" class="my-4 rounded-lg shadow-lg p-4 border-blue-200 border-2 overflow-scroll">
       <p v-for="word of words">{{ word }}</p>
     </div>
+    
   </div>
 </div>
     
@@ -47,7 +48,7 @@ export default {
           .catch(err => {
             console.log(err)
           })
-    }
+    },
 }
 </script>
 <style scoped>

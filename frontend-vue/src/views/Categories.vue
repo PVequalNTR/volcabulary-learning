@@ -8,6 +8,7 @@
                 </router-link>
                 <router-view></router-view>
             </div>
+            <center><button @click="change(-1)">previous_page</button><button @click="change(1)">next_page</button></center>
         </div>
     </div>
 </template>
@@ -28,6 +29,7 @@ export default {
         name: '',
         vol_list: [],
         description: '',
+        page: 1,
     }
   },
   mounted() {
@@ -39,6 +41,24 @@ export default {
       .catch(err => {
         console.log(err)
       })
+  },
+  methods: {
+    change(pk) {
+      this.page += pk
+      axios
+        .get('api/v1/latest_categories/' + this.page + '/')
+        .then(response => {
+          this.categories_list.splice(1, this.categories_list.length)
+          for(var i = 0; i < res.data.length; i++) {
+            this.categories_list.push(res.data[i])
+          }
+          console.log(response)
+        })
+        .catch(err => {
+          console.log(err)
+          this.page -= pk
+        })
+      }
+    }
   }
-}
 </script>

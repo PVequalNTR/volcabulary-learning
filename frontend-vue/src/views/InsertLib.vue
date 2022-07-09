@@ -76,8 +76,8 @@ export default {
         console.log(err);
         alert(err.response.data.info);
       })
-
       console.log("pass")
+      
     },
   },
   watch:{
