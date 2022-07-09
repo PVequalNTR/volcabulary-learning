@@ -9,7 +9,7 @@ from .serializers import latest_categoriesSerializer, SentenceSerializer, get_ca
 from django.contrib.auth.models import User, auth
 import random
 import json
-from .Crawler import Cambridge
+from .Crawler import CrawlerInterface
 class latest_categories(APIView):
     def get(self, request, pk, format=None):
         number = categories.objects.all().count()
@@ -44,7 +44,6 @@ def get_by_id(id):
     for word in words:
         sentences = list(Sentence.objects.filter(word = word))
         sentence = random.choice(sentences)
-        sentence.name = sentence.name.replace(word, f'{word[0]}___{word[(len(word) - 2):]}')
         ret.append(sentence)
     random.shuffle(ret)
     return ret
@@ -67,7 +66,7 @@ class check(APIView):
         data = request.data
         count = 0
         for item in data:
-            word = Sentence.objects.filter(id = item['id'])[0].word
+            word = Sentence.objects.filter(id = item['id'])[0].ans
             if word == item['word']:
                 count += 1
                 correct.append(True)
@@ -118,7 +117,8 @@ class add_category(APIView):
             new_category.save()
             buildwords(vol_list)
             return Response({
-                'info': 'Success !'
+                'info': 'Success !',
+                'id': new_category.id
             })
 
 def buildwords(vol_list):
@@ -126,14 +126,26 @@ def buildwords(vol_list):
         if Sentence.objects.filter(word = word).exists():
             continue
         else:
-            listEn, listCh = Cambridge.GetWebData(word)
-            if listEn == 'Can\'t find the word in Cambridge':
+            result = CrawlerInterface.GetWebData(word)
+            if result[6] == 'Can\'t find the word in dictionary':
                 return ('Error', word)
-            for i in range(len(listEn)):
-                sentence = listEn[i]
-                if len(sentence) > 100:
+            wordchanges = [word]
+            for i in range(2, 6):
+                for j in result[i]:
+                    wordchanges.append(j)
+            for i in range(len(result[0])):
+                sentence = result[0][i]
+                if len(sentence) > 90:
                     continue
-                Sentence.objects.create(name = sentence, word = word, source = 'Cambridge', chinese = listCh[i])
+                words = sentence.split(' ')
+                ans = ''
+                for _word in wordchanges:
+                    if _word in words:
+                        sentence = sentence.replace(_word, _word[0] + '___' + _word[len(_word) - 1])
+                        ans = _word
+                    print(_word)
+                print(word, sentence)
+                Sentence.objects.create(name = sentence, word = word, source = 'Cambridge', chinese = result[1][i], ans = ans)
     return ('Success', 0)
 
 class edit_category(APIView):

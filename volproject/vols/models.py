@@ -21,7 +21,7 @@ class Sentence(models.Model):
     word = models.CharField(max_length=1000)
     source = models.CharField(max_length=1000)
     chinese = models.CharField(max_length=1000)
-
+    ans = models.CharField(max_length=1000)
     class Meta:
         ordering = ('word', )
 
