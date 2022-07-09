@@ -8,7 +8,6 @@
                 </router-link>
                 <router-view></router-view>
             </div>
-            <center><button @click="change(-1)">previous_page</button><button @click="change(1)">next_page</button></center>
         </div>
     </div>
 </template>
@@ -34,7 +33,7 @@ export default {
   },
   mounted() {
     axios
-      .get('api/v1/latest_categories/1/')
+      .get('api/v1/all_categories/')
       .then(res => {
         this.categories_list = res.data
       })

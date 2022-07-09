@@ -135,17 +135,44 @@ def get2(word):
     # 相對的中英文有同個index
     # 如果找不到單字，回傳"Can't find the word"
 
+def find_monogram(word):
+    url = "https://conjugator.reverso.net/conjugation-english-verb-"+word+".html"
+    request =  Request(url,headers={
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+    })
+    try:
+        Web = urlopen(request)
+    except:
+        return "not found"
+
+    # 找不到就回傳 not found
+    Data = Web.read().decode("utf-8")
+    bs4_Data = BeautifulSoup(Data,'html.parser')
+    if(bs4_Data.find(name="span",id_="ch_lblCustomMessage" )):
+         return "not find"
+
+    find_Data =  bs4_Data.find(name="div",class_="result-block-api").find(name="div",class_="blue-box-wrap").find_all(name="i",class_="verbtxt")
+    third_verb = find_Data[2].text
+
+    return third_verb
+
 def GetWebData(word):
     CambridgelistEn,CambridgelistCh = get1(word)
     yahoolistEn,yahoolistCh,Tense,Comparative,Plural,VerbChange = get2(word)
     notfind = []
+    Third=[find_monogram(word)]
+
+        
 
     if(CambridgelistEn=="Can't find the word in Cambridge"):
         notfind.append("Cambridge")
         CambridgelistEn=[]
+        CambridgelistCh=[]
     if(yahoolistEn=="Can't find the word in yahoo"):
         notfind.append("yahoo")
         yahoolistEn=[]
+        yahoolistCh=[]
+
 
     listEn = []
     listEn += CambridgelistEn
@@ -154,7 +181,7 @@ def GetWebData(word):
     listCh += CambridgelistCh
     listCh += yahoolistCh
 
-    return listEn,listCh,Tense,Comparative,Plural,VerbChange,notfind
+    return listEn,listCh,Tense,Comparative,Plural,VerbChange,notfind,Third
     # 回傳格式 
     # [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ]
     # ,["中文","這是中文"...]
@@ -162,6 +189,7 @@ def GetWebData(word):
     # ,[比較級,最高級] 形容詞 (無則為[])
     # ,[名詞複數] 可數名詞 (無則為[])
     # ,[過去式1,過去式2,過去分詞1,過去分詞2,現在分詞] 如果過去式有兩種則有值 (無則為[])
+    # Third: "not found" or "words" 
     # 相對的中英文有同個index
     # 如果找不到單字，notfind = [Cambridge,yahoo] *也可能出現一個找到一個找不到的情況
     # 當yahoo找不到 Tense,Comparative,Plural,VerbChange 皆為0

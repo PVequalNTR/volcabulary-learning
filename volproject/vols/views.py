@@ -127,12 +127,16 @@ def buildwords(vol_list):
             continue
         else:
             result = CrawlerInterface.GetWebData(word)
-            if result[6] == 'Can\'t find the word in dictionary':
+            if result[7] == 'Can\'t find the word in dictionary':
                 return ('Error', word)
             wordchanges = [word]
-            for i in range(2, 6):
+            for i in range(2, 8):
                 for j in result[i]:
                     wordchanges.append(j)
+            print(wordchanges)
+            length = len(wordchanges)
+            for i in range(length):
+                wordchanges.append(wordchanges[i].replace(wordchanges[i], wordchanges[i][0].upper() + wordchanges[i][1:]))
             for i in range(len(result[0])):
                 sentence = result[0][i]
                 if len(sentence) > 90:
