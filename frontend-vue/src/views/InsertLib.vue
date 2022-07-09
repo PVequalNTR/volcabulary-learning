@@ -101,6 +101,7 @@ export default {
           this.ifbtndisable = true; 
           this.notFormat=true;
           this.wordInputId = "ErrorIn"
+          break;
         }
       }
     }
