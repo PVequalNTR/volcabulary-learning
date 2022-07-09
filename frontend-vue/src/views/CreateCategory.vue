@@ -1,7 +1,7 @@
 <template>
 
 <div id="InsertEntryBox" class="absolute ">
-  <InsertEntry msg="插入單字" ToLocation="/insertword"></InsertEntry>
+  <!-- <InsertEntry msg="插入單字" ToLocation="/insertword"></InsertEntry> -->
   <InsertEntry msg="新增單字庫" ToLocation="/insertlib"></InsertEntry>
   <InsertEntry msg="修改單字庫" ToLocation="/modifylib"></InsertEntry>
 </div>

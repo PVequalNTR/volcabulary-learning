@@ -147,7 +147,7 @@ class edit_category(APIView):
                 'info': 'No this category !'
             }, status=status.HTTP_400_BAD_REQUEST)
         else :
-            category = categories.objects.filter(name = name)[0]
+            category = categories.objects.filter(id = id)[0]
             category.name = name
             category.description = description
             category.vol_list = vol_list

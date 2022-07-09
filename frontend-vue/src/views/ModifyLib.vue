@@ -10,11 +10,19 @@
         </select> 
       </div>
       <div class= "input" style="height:30%">
+        <div id="InputTitle" >修改名稱</div>
+        <input id="in" :value="libname" @input="libname=$event.target.value"> 
+      </div>
+      <div class= "input" style="height:30%">
+        <div id="InputTitle" >修改敘述</div>
+        <input id="in" :value="descriptinput" @input="descriptinput=$event.target.value"> 
+      </div>
+      <div class= "input" style="height:30%">
         <div id="InputTitle" >修改單字</div>
         <input :id="wordInputId" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
       <div v-if="notFormat" style="color:red;">輸入格式錯誤</div>
-      <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
+      <button type="button" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
     </form>
   </div>
 </template>
@@ -36,8 +44,9 @@ export default {
   data() {
     return {
       sentences: [],
-      wordinput: "", // 從後端抓單字
-      descriptnput:"",
+      libname:"",
+      wordinput: "",
+      descriptinput: "",
       ifbtndisable: true,
       notFormat:false,
       wordInputId: "in",
@@ -45,7 +54,7 @@ export default {
     }
   },
   mounted() {
-    alert("修改單字時，請使用小寫，有多個單字請以,隔開，否則將無法送出");
+    //alert("修改單字時，請使用小寫，有多個單字請以,隔開，否則將無法送出");
     axios.get("api/v1/all_categories/")
     .then( (res) => {
       this.categoryList = res.data
@@ -60,20 +69,20 @@ export default {
     sent(){
       var list = this.wordinput.split(",")
       var id = document.getElementById("select").value
-      var name=""
+      console.log(this.libname,this.descriptinput,typeof(this.libname),typeof(this.descriptinput))
       for(var i=0;i<this.categoryList.length;i++){
         if(this.categoryList[i].id==parseInt(id)) name = this.categoryList[i].name
       }
       axios.post("api/v1/edit_category/"+id,{
-          "name": name,
-          "description": this.descriptnput,
+          "name": this.libname,
+          "description": this.descriptinput,
           "vol_list": list,
         }
       )
       .then((res)=>{
         console.log(res);
         this.libname="";
-        this.descriptnput="";
+        this.descriptinput="";
         this.wordinput="";
       })
       .catch((err) => {
@@ -86,6 +95,8 @@ export default {
       axios.get("api/v1/get_category/"+document.getElementById("select").value)
       .then( (res) => {
         this.wordinput = res.data.vol_list.join(",")
+        this.descriptinput =  res.data.description;
+        this.libname = res.data.name
       } )
       .catch( (err) => console.log(err) )
     }
@@ -120,18 +131,19 @@ export default {
 </script>
 <style>
     #formbox{
-        background-color: #94D8FF;
+        background-color: #a0d5f4;
         left: 50%;
         transform: translateX(-50%);
         top: 20vh;
         width: 70vh;
-        height: 40vh;
+        height: 60vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
+        border-radius: 15px;
         border-width: 2px;
-        border-color: black;
+        border-color: rgb(26, 118, 60);
     }
     #BuildTitle{
       height: 30px;
@@ -178,6 +190,8 @@ export default {
     #select{
         height: 50%;
         width: 60%; 
+        border-width: 2px;
+        border-color: black;
     }
     #InputTitle{
         border-radius: 15px;

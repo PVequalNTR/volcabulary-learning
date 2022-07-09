@@ -40,7 +40,7 @@ export default {
     }
   },
   mounted() {
-    alert("輸入單字時，請使用小寫，有多個單字請以,隔開，否則將無法送出");
+    //alert("輸入單字時，請使用小寫，有多個單字請以,隔開，否則將無法送出");
     /*axios
       .get('api/v1/sentence/worthwhile/')
       .then(res => {
@@ -77,18 +77,19 @@ export default {
 </script>
 <style>
     #formbox{
-        background-color: #94D8FF;
+        background-color: #a0d5f4;
         left: 50%;
         transform: translateX(-50%);
         top: 20vh;
         width: 70vh;
-        height: 40vh;
+        height: 60vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        border-width: 2px;
-        border-color: black;
+        border-radius: 15px;
+        border-width: 3px;
+        border-color: rgb(26, 118, 60);
     }
     #BuildTitle{
       height: 30px;
