@@ -1,6 +1,6 @@
 <template>
   <div id="formbox" class="absolute" >
-    <form style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
+    <div style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
       <div id="BuildTitle" >修改單字</div>
       <div class= "select" style="height:30%">
         <div id="SelectTitle" >選擇題庫</div>
@@ -23,7 +23,7 @@
       </div>
       <div v-if="notFormat" style="color:red;">輸入格式錯誤</div>
       <button type="button" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
-    </form>
+    </div>
   </div>
 </template>
 
