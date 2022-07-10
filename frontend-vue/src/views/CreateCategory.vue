@@ -9,9 +9,6 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import axios from 'axios'
-import { onMounted } from 'vue'
 import InsertEntry from "../components/Create/InsertEntry.vue"
 
 export default {

@@ -9,7 +9,7 @@ import router from './router'
 
 const app = createApp(App)
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/'
+axios.defaults.baseURL = 'https://vocabulary-learn-api.herokuapp.com/'
 
 app.use(createPinia())
 app.use(router)

@@ -40,17 +40,17 @@ const router = createRouter({
     {
       path:"/insertword",
       name:"insertword",
-      component: () => import("../views/insertword.vue")
+      component: () => import("../views/Insertword.vue")
     },
     {
       path:"/insertlib",
       name:"insertlib",
-      component: () => import("../views/insertlib.vue")
+      component: () => import("../views/InsertLib.vue")
     },
     {
       path:"/modifylib",
       name:"modifylib",
-      component: () => import("../views/modifylib.vue")
+      component: () => import("../views/ModifyLib.vue")
     }
   ]
 })

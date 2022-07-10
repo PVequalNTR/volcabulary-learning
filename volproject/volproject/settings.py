@@ -30,6 +30,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'https://vocabulary-learn.herokuapp.com/',
+    'https://vocabulary-learn-api.herokuapp.com/',
 ]
 
 
@@ -53,10 +54,12 @@ INSTALLED_APPS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://vocabulary-learn.herokuapp.com/",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,11 +96,11 @@ WSGI_APPLICATION = 'volproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'vol-project',
-        'USER': 'postgres',
+        'NAME': 'd94pb3qamks1e',
+        'USER': 'bcojbeacorondv',
         'PASSWORD': getenv('PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5555',
+        'HOST': 'ec2-3-222-74-92.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 

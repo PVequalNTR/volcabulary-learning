@@ -1,7 +1,7 @@
 <template>
   <nav class="bg-white h-20 px-4 py-2 flex flex-row">
     <router-link to="/" class="h-full flex items-center basis-1/2 hover:text-sky-700 hover:border-b-green-400">
-      <img :src="'src/assets/' + 'mdcpp_icon.png'" alt="mdcpp_icon" class="h-full mx-4"/>
+      <img :src="'/mdcpp_icon.png'" alt="mdcpp_icon" class="h-full mx-4"/>
       <span class="text-2xl font-semibold hover:text-sky-700">文意字彙線上平台</span>
     </router-link>
     <ul class="h-full flex items-center text-lg flex-row-reverse basis-1/2">

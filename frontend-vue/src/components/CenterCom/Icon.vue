@@ -12,7 +12,7 @@ export default {
     name: "icon",
     data(){
         return{
-            imgsrc: "src/assets/mdcpp_icon.png",
+            imgsrc: "/mdcpp_icon.png",
         }
     },
     methods:{
