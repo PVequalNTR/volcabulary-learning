@@ -168,16 +168,17 @@ class edit_category(APIView):
             }, status=status.HTTP_400_BAD_REQUEST)
         else :
             category = categories.objects.filter(id = id)[0]
-            category.name = name
-            category.description = description
-            category.vol_list = vol_list
-            category.save()
+            
             ret = buildwords(vol_list)
             if ret[0] != 'Success':
                 return Response({
                     'info': 'The word ' + ret[1] + ' was not found in dictionary'
                 }, status=status.HTTP_400_BAD_REQUEST)
             else :
+                category.name = name
+                category.description = description
+                category.vol_list = vol_list
+                category.save()
                 return Response({
                     'info': 'Success !'
                 })
