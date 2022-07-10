@@ -57,6 +57,9 @@ export default {
       .then(res => {
         this.sentences = res.data
         this.max = Object.keys(res.data).length
+        for(var i = 0; i < this.max; i++) {
+          this.input.push('')
+        }
       })
       .catch(err => {
         console.log(err)
@@ -70,6 +73,7 @@ export default {
                   id: this.sentences[i].id,
                   word: this.input[i],
               })
+              console.log(this.answer)
           }
           axios.post("api/v1/check/", this.answer)
           .then(response => {

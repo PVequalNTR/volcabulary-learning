@@ -7,9 +7,9 @@ import btn from "./btn.vue"
 <template>
     <div id="box" class="absolute" >
         <icon ></icon>
-        <btn msg="教學" jump="https://hackmd.io/@MingdaoCP/SJXthxDF5"></btn>
-        <btn second=0.6 ></btn>
-        <btn second=1.2 ></btn>
+        <btn msg="歡迎來到文意字彙解題網站 !"></btn>
+        <btn msg="參閱教學" jump="https://hackmd.io/@MingdaoCP/SJXthxDF5"></btn>
+        
     </div>
 </template>
 

@@ -42,6 +42,7 @@ def get_by_id(id):
     words = Category.vol_list
     ret = []
     for word in words:
+        print(word)
         sentences = list(Sentence.objects.filter(word = word))
         sentence = random.choice(sentences)
         ret.append(sentence)
@@ -70,6 +71,7 @@ class check(APIView):
             if word == item['word']:
                 count += 1
                 correct.append(True)
+                
             else:
                 correct.append(False)
             
@@ -127,10 +129,10 @@ def buildwords(vol_list):
             continue
         else:
             result = CrawlerInterface.GetWebData(word)
-            if result[7] == 'Can\'t find the word in dictionary':
+            if len(result[7]) == 2:
                 return ('Error', word)
             wordchanges = [word]
-            for i in range(2, 8):
+            for i in range(2, 7):
                 for j in result[i]:
                     wordchanges.append(j)
             print(wordchanges)
@@ -147,8 +149,8 @@ def buildwords(vol_list):
                     if _word in words:
                         sentence = sentence.replace(_word, _word[0] + '___' + _word[len(_word) - 1])
                         ans = _word
-                    print(_word)
-                print(word, sentence)
+                if ans == '':
+                    continue
                 Sentence.objects.create(name = sentence, word = word, source = 'Cambridge', chinese = result[1][i], ans = ans)
     return ('Success', 0)
 

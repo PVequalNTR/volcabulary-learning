@@ -1,6 +1,6 @@
 <template>
 <div class="modal">
-  <div class="rounded-lg w-1/2 h-2/3 px-16 py-8">
+  <div class="rounded-lg w-1/2 h-2/3 px-16 py-8 overflow-scroll" >
     <div class="h-10">
       <button @click="$router.go(-1)" class="h-5 w-5 float-right">
           <i class="fa-solid fa-x float-right"></i>
@@ -12,7 +12,7 @@
       <button @click="viewlist = !viewlist" class="text-lg my-4 p-4 rounded shadow-lg bg-amber-400 text-white text-center font-semibold mr-2">單字列表</button>
       <router-link :to="{ path:'/solve', query:{id: id}}" class="text-lg my-4 p-4 rounded shadow-lg bg-green-400 text-white text-center font-semibold ml-2">開始測驗</router-link>
     </div>
-    <div v-if="viewlist === true" class="my-4 rounded-lg shadow-lg p-4 border-blue-200 border-2 overflow-scroll">
+    <div v-if="viewlist === true" class="my-4 rounded-lg shadow-lg p-4 border-blue-200 border-2 ">
       <p v-for="word of words">{{ word }}</p>
     </div>
     

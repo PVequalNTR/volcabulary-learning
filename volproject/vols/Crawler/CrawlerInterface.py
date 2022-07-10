@@ -181,7 +181,7 @@ def GetWebData(word):
     listCh += CambridgelistCh
     listCh += yahoolistCh
 
-    return listEn,listCh,Tense,Comparative,Plural,VerbChange,notfind,Third
+    return listEn,listCh,Tense,Comparative,Plural,VerbChange,Third,notfind
     # 回傳格式 
     # [ 'an _____ door/window', 'An _____ suitcase lay on her bed.'.... ]
     # ,["中文","這是中文"...]

@@ -5,12 +5,12 @@
       <span class="text-2xl font-semibold hover:text-sky-700">文意字彙線上平台</span>
     </router-link>
     <ul class="h-full flex items-center text-lg flex-row-reverse basis-1/2">
-      <li class="basis-1/6">
+      <!--<li class="basis-1/6">
         <router-link to="" v-if="login === true" class="rounded bg-blue-600 text-white px-6 py-3">帳號</router-link>
         <router-link to="" v-else class="rounded bg-blue-600 text-white px-6 py-3">登入</router-link>
-      </li>
+      </li>-->
       <li class="basis-1/6 ">
-        <router-link to="/about" class="hover:text-sky-700 p-2 hover:border-b-green-400 hover:border-b-2">介紹</router-link>
+        <router-link to="/about" class="rounded bg-blue-600 text-white px-6 py-3">介紹</router-link>
       </li>
       <li class="basis-1/6">
         <router-link to="/Categories" class="hover:text-sky-700 p-2 hover:border-b-green-400 hover:border-b-2">開始</router-link>
