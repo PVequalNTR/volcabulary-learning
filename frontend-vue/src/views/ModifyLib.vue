@@ -87,7 +87,8 @@ export default {
       })
       .catch((err) => {
         console.log(err);
-        alert(err.response.data.info);
+        var errorword = err.response.data.info.split(" ")[2]
+        alert("找不到單字"+errorword);
       })
     },
     SelectCategory(){
