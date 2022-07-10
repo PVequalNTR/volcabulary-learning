@@ -152,6 +152,8 @@ def buildwords(vol_list):
                 if ans == '':
                     continue
                 Sentence.objects.create(name = sentence, word = word, source = 'Cambridge', chinese = result[1][i], ans = ans)
+            if not Sentence.objects.filter(word = word).exists():
+                return ('Error', word)
     return ('Success', 0)
 
 class edit_category(APIView):
@@ -170,7 +172,12 @@ class edit_category(APIView):
             category.description = description
             category.vol_list = vol_list
             category.save()
-            buildwords(vol_list)
-            return Response({
-                'info': 'Success !'
-            })
+            ret = buildwords(vol_list)
+            if ret[0] != 'Success':
+                return Response({
+                    'info': 'The word ' + ret[1] + ' was not found in dictionary'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            else :
+                return Response({
+                    'info': 'Success !'
+                })
