@@ -13,6 +13,11 @@ stripe = "*"
 psycopg2 = "*"
 python-dotenv = "*"
 bs4 = "*"
+gunicorn = "*"
+dj-database-url = "*"
+dj-static = "*"
+django-heroku = "*"
+static3 = "*"
 
 [dev-packages]
 
