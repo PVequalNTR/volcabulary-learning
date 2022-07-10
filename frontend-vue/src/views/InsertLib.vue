@@ -1,6 +1,6 @@
 <template>
   <div id="formbox" class="absolute" >
-    <form style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
+    <div style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
       <!-- submit.prevent可以避免表單重新整理 -->
       <div id="BuildTitle">新增單字庫</div>
       <div class= "input" style="height:30%">
@@ -16,8 +16,8 @@
         <input :id="wordInputId" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
       <div v-if="notFormat" style="color:red;">輸入格式錯誤</div>
-      <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
-    </form>
+      <button type="button" :disabled="ifbtndisable" id="BuildSendBtn" @click="sent">送出</button>
+    </div>
   </div>
 </template>
 

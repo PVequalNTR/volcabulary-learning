@@ -1,6 +1,6 @@
 <template>
   <div id="formbox" class="absolute" >
-    <form style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
+    <div style="height:100%;width: 100%;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
       <div id="BuildTitle">插入單字</div>
       <div class= "select" style="height:30%">
         <div id="SelectTitle" >選擇題庫</div>
@@ -14,7 +14,7 @@
         <input id="in" :value="wordinput" @input="wordinput=$event.target.value"> 
       </div>
       <button type="submit" :disabled="ifbtndisable" id="BuildSendBtn">送出</button>
-    </form>
+    </div>
   </div>
 </template>
 

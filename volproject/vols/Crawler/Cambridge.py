@@ -27,10 +27,10 @@ def GetWebData(word): # 輸入單字
             continue
         Setence = SetenceData.find(name="span",class_="eg deg").text
         # 這裡不能用.string要用.text，因為span裡面還塞了不少的<a>標籤(連結到個別單字頁面)
-        # if len(Setence.split(" "))<=5 :
-        #     notAppend.append(i)
-        #     i = i+1 
-        #     continue
+        if len(Setence.split(" "))<=5 :
+            notAppend.append(i)
+            i = i+1 
+            continue
         listEn.append(Setence)
         i = i+1
         # listEn 為英文句子
@@ -38,10 +38,10 @@ def GetWebData(word): # 輸入單字
     listCh = []
     i=0
     for TransData in TransDatas:
-        # if len(notAppend) != 0 and notAppend[0] == i:
-        #     notAppend.pop(0)
-        #     i = i+1
-        #     continue
+        if len(notAppend) != 0 and notAppend[0] == i:
+            notAppend.pop(0)
+            i = i+1
+            continue
         Translation = TransData.text
         listCh.append(Translation)
         i = i+1
